@@ -12,9 +12,6 @@ All information is modified locally, and the application does not collect or tra
 <h4>Contact:</h4>
 If you have any concerns, suggestions, or questions about the extension, please contact me at sophie.a.debs@gmail.com.
 
-[link to Google!](http://google.com)
-
-
 <h4>Credits:</h4>
 - Many thanks to Nate Neumann for getting this project off the ground. 
 - Credits to Qmunicate Magazine for the image; taken from a great article:
