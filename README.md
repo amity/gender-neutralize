@@ -8,6 +8,7 @@ Pre- and Post- Extension:
 
 <h4>Contribution:</h4>
 The codebase will always be open source; while users are welcome to modify to make their own modifications/updates, in the spirit of communal development, please submit a Pull Request and I'll see if I can incorporate your changes into the full build! 
+**Have a bug/improvement, but don't want to code it? Make an issue!**
 Nothing about the app is monetized in any way, so support and updates is limited by my own free time -- if you have any additions or improvements, it makes a better extension for everyone. Contributors will be credited on this README.
 
 <h4>Privacy Policy:</h4>
