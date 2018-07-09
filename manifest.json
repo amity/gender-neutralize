@@ -1,26 +1,22 @@
 {
-    "author": "Nate Neumann",
-    "content_scripts": [
-        {
-            "all_frames": true,
-            "js": [
-                "content_script.js"
-            ],
-            "matches": [
-                "*://*/*"
-            ],
-            "run_at": "document_end"
-        }
-    ],
-    "description": "Neutralize all genders!",
-    "icons": {
-        "128": "img/icon128.png",
-        "16": "img/icon16.png",
-        "32": "img/icon32.png",
-        "48": "img/icon48.png"
-    },
-    "manifest_version": 2,
-    "name": "Gender Neutralize",
-    "short_name": "De-Gender",
-    "version": "2.1"
+  "author": "Sophie Debs",
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": ["content_script.js"],
+      "matches": ["*://*/*"],
+      "run_at": "document_end"
+    }
+  ],
+  "description": "De-gender language on the web",
+  "icons": {
+    "128": "img/icon128.png",
+    "16": "img/icon16.png",
+    "32": "img/icon32.png",
+    "48": "img/icon48.png"
+  },
+  "manifest_version": 2,
+  "name": "Gender Neutralize",
+  "short_name": "De-Gender",
+  "version": "2.2.1"
 }
