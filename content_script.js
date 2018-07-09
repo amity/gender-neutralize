@@ -28,7 +28,7 @@ function replaceText(v) {
   v = v.replace(/\bHe has\b/g, "They have");
   v = v.replace(/\bHe's\b/g, "They're");
   v = v.replace(/\bShe's\b/g, "They're");
-  v = v.replace(/\b(s)?he's\b/g, "they're");
+  v = v.replace(/\b(s)?he's/g, "they're");
   v = v.replace(/\bHe has\b/g, "They have");
   v = v.replace(/\bHe has\b/g, "They have");
   v = v.replace(/\bHe has\b/g, "They have");
@@ -69,8 +69,14 @@ function replaceText(v) {
   v = v.replace(/\bSon\b/g, "Child");
   v = v.replace(/daughter\b/g, "child");
   v = v.replace(/\bDaughter\b/g, "Child");
-  v = v.replace(/\b(boy|girl)\b/g, "child");
-  v = v.replace(/\b(Boy|Girl)\b/g, "Child");
+  v = v.replace(/\bboys\b/g, "young people");
+  v = v.replace(/\bBoys\b/g, "Young people");
+  v = v.replace(/\bboy\b/g, "young person");
+  v = v.replace(/\bBoy\b/g, "Young person");
+  v = v.replace(/\bgirls\b/g, "young people");
+  v = v.replace(/\bGirls\b/g, "Young people");
+  v = v.replace(/\bgirl\b/g, "young person");
+  v = v.replace(/\bGirl\b/g, "Young person");
   v = v.replace(/father/g, "parent");
   v = v.replace(/Father/g, "Parent");
   v = v.replace(/mother/g, "parent");
