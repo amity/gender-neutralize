@@ -3,7 +3,7 @@
   "content_scripts": [
     {
       "all_frames": true,
-      "js": ["content_script.js"],
+      "js": ["replacement.js"],
       "matches": ["*://*/*"],
       "run_at": "document_end"
     }
