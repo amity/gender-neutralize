@@ -23,4 +23,4 @@ If you have any concerns, suggestions, or questions about the extension, please 
 
 [Gender-Neutral Washrooms: Campus and Community](https://qmunicatemagazine.com/2015/02/07/gender-neutral-washrooms-campus-and-community)
 
-Current version: 3.0.1. Last updated 7/9/18.
+Current version: 3.2.2. Last updated 7/14/18.

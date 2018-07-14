@@ -1,7 +1,7 @@
 {
   "name": "Gender Neutralize",
   "short_name": "De-Gender",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "author": "Sophie Debs",
 
   "content_scripts": [
