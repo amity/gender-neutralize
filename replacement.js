@@ -9,12 +9,12 @@ function getPrefs() {
     function(obj) {
       changePronouns = obj.pronounsBool;
       dudeReplacement = obj.dudeReplacement;
-      console.log(changePronouns);
-      console.log(dudeReplacement);
-      main(document, changePronouns, dudeReplacement);
+      console.log("storage.local: " + changePronouns + dudeReplacement);
+
+      // Java dev btw.
+      main(document);
     }
   );
-
   // chrome.storage.sync.get("pronounsBool", function(obj) {
   //   changePronouns = obj.pronounsBool;
   //   console.log(changePronouns);
@@ -221,7 +221,7 @@ function shouldIgnoreNode(node) {
 }
 
 // Actually walks the page
-function docWalker(root, pronounsVar, dudeVar) {
+function docWalker(root) {
   // Go from root, only consider Text nodes
   var walker = document.createTreeWalker(
     root,
@@ -232,7 +232,7 @@ function docWalker(root, pronounsVar, dudeVar) {
 
   var nextNode;
   for (nextNode = root; nextNode != null; nextNode = walker.nextNode()) {
-    if (nextNode != null && (nextNode.nodeType === 3) & (pronounsVar == true)) {
+    if (nextNode != null && nextNode.nodeType === 3) {
       nextNode.nodeValue = neutralizeNode(nextNode.nodeValue);
     }
   }
@@ -257,10 +257,10 @@ function handleMutation(mutationList) {
   }
 }
 
-function main(doc, pronounsVar, dudeVar) {
+function main(doc) {
   doc.title = neutralizeNode(doc.title);
 
-  docWalker(doc.body, pronounsVar, dudeVar);
+  docWalker(doc.body);
 
   var observerConfig = {
     characterData: true,
@@ -272,5 +272,4 @@ function main(doc, pronounsVar, dudeVar) {
   observer.observe(document.body, observerConfig);
 }
 
-// Yeah, I'm a Java developer.
 getPrefs();

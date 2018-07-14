@@ -15,6 +15,9 @@ function save_options() {
       }, 750);
     }
   );
+  localStorage.setItem("pronounsKey", pronouns);
+  localStorage.setItem("dudeKey", dude);
+
   chrome.storage.local.set(
     {
       pronounsBool: pronouns,
@@ -25,15 +28,9 @@ function save_options() {
     }
   );
   // Save it using the Chrome extension storage API.
-  chrome.storage.sync.set(
-    { pronounsBool: true, dudeReplacement: "" },
-    function() {
-      console.log("Settings saved");
-    }
-  );
 
   // Read it using the storage API
-  chrome.storage.sync.get(["foo", "bar"], function(items) {
+  chrome.storage.sync.get(["pronounsBool", "dudeReplacement"], function(items) {
     message("Settings retrieved", items);
   });
 }
@@ -50,6 +47,9 @@ function restore_options() {
     function(items) {
       document.getElementById("pronouns").checked = items.pronounsBool;
       document.getElementById("dude").value = items.dudeReplacement;
+
+      localStorage.setItem("pronounsBool", items.pronounsBool);
+      localStorage.setItem("dudeReplacement", items.dudeReplacement);
     }
   );
 }
