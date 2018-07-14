@@ -10,12 +10,6 @@ function getPrefs() {
       changePronouns = obj.pronounsBool;
       dudeReplacement = obj.dudeReplacement;
       dudePluralReplacement = obj.dudePluralReplacement;
-      console.log(
-        "storage.local: " +
-          changePronouns +
-          dudeReplacement +
-          dudePluralReplacement
-      );
 
       // Java dev btw.
       main(document);
