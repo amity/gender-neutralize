@@ -1,5 +1,9 @@
 {
+  "name": "Gender Neutralize",
+  "short_name": "De-Gender",
+  "version": "3.1.3",
   "author": "Sophie Debs",
+
   "content_scripts": [
     {
       "all_frames": true,
@@ -8,6 +12,8 @@
       "run_at": "document_end"
     }
   ],
+  "permissions": ["storage"],
+
   "description": "De-gender language on the web",
   "icons": {
     "128": "img/icon128.png",
@@ -15,8 +21,9 @@
     "32": "img/icon32.png",
     "48": "img/icon48.png"
   },
-  "manifest_version": 2,
-  "name": "Gender Neutralize",
-  "short_name": "De-Gender",
-  "version": "3.0.1"
+  "manifest_version": 3,
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  }
 }

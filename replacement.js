@@ -1,8 +1,36 @@
+// TODO: Translate the WHOLE page and then, based on options, change a few (back, or whatever)
+// Window.localStorage
+
+var changePronouns, dudeReplacement;
+
+function getPrefs() {
+  chrome.storage.local.get(
+    { pronounsBool: true, dudeReplacement: "" },
+    function(obj) {
+      changePronouns = obj.pronounsBool;
+      dudeReplacement = obj.dudeReplacement;
+      console.log(changePronouns);
+      console.log(dudeReplacement);
+      main(document, changePronouns, dudeReplacement);
+    }
+  );
+
+  // chrome.storage.sync.get("pronounsBool", function(obj) {
+  //   changePronouns = obj.pronounsBool;
+  //   console.log(changePronouns);
+  // });
+  // chrome.storage.sync.get("dudeReplacement", function(obj) {
+  //   dudeReplacement = obj.dudeReplacement;
+  //   console.log(dudeReplacement);
+  // });
+}
+
 // Primary replacement function. Parameter node, returns replacement text.
-function neutralizeNode(node) {
-  text = node.nodeValue;
+function neutralizeNode(nodeText) {
+  text = nodeText;
   // If text -- already should be the case, but just in case.
-  if (node.nodeType === 3) {
+  console.log("CP" + changePronouns);
+  if (changePronouns) {
     text = text.replace(/\b(s)?he was\b/g, "they were");
     text = text.replace(/\bShe was\b/g, "They were");
     text = text.replace(/\bHe was\b/g, "They were");
@@ -12,8 +40,7 @@ function neutralizeNode(node) {
     text = text.replace(/\bHe's\b/g, "They're");
     text = text.replace(/\bShe's\b/g, "They're");
     text = text.replace(/\b(s)?he's/g, "they're");
-    text = text.replace(/\bHe has\b/g, "They have");
-    text = text.replace(/\bHe has\b/g, "They have");
+    text = text.replace(/\bhe has\b/g, "they have");
     text = text.replace(/\bHe has\b/g, "They have");
     text = text.replace(/\bHe is\b/g, "They are");
     text = text.replace(/\bShe is\b/g, "They are");
@@ -185,15 +212,17 @@ function neutralizeNode(node) {
 // Don't run on editable nodes to avoid confusion
 function shouldIgnoreNode(node) {
   return (
-    // Editable nodes, nodes w/ editable parents, inputs
+    // Editable nodes, nodes w/ editable parents, inputs, text areas
     node.isContentEditable ||
     (node.parentNode && node.parentNode.isContentEditable) ||
-    node.tagName.toLowerCase() == "input"
+    (node.tagName &&
+      (node.tagName.toLowerCase() == "input" ||
+        node.tagName.toLowerCase() == "textarea"))
   );
 }
 
 // Actually walks the page
-function docWalker(root) {
+function docWalker(root, pronounsVar, dudeVar) {
   // Go from root, only consider Text nodes
   var walker = document.createTreeWalker(
     root,
@@ -203,21 +232,23 @@ function docWalker(root) {
   );
 
   var nextNode;
-  for (nextNode = root; walker.nextNode != null; nextNode = walker.nextNode()) {
-    nextNode.nodeValue = neutralizeNode(nextNode);
+  for (nextNode = root; nextNode != null; nextNode = walker.nextNode()) {
+    if (nextNode != null && (nextNode.nodeType === 3) & (pronounsVar == true)) {
+      nextNode.nodeValue = neutralizeNode(nextNode.nodeValue);
+    }
   }
 }
 
 // Updates on additions or changes to page
 function handleMutation(mutationList) {
   for (mutation of mutationList) {
-    for (addedNode of mutation.addedNode) {
-      if (!shouldIgnoreNode(addedNode)) {
+    for (addedNode of mutation.addedNodes) {
+      if (shouldIgnoreNode(addedNode)) {
         // Don't walk anything editable (children are editable too)
         continue;
       } else if (addedNode.nodeType === 3) {
         // All text nodes are leaves -- don't need to walk.
-        addedNode.nodeValue = neutralizeNode(addedNode);
+        addedNode.nodeValue = neutralizeNode(addedNode.nodeValue);
       } else {
         // All others, walk through children to look for textnodes.
         // Does this need to be the case? Or does it already include?
@@ -227,14 +258,20 @@ function handleMutation(mutationList) {
   }
 }
 
-function main(doc) {
+function main(doc, pronounsVar, dudeVar) {
   doc.title = neutralizeNode(doc.title);
 
-  docWalker(doc.body);
+  docWalker(doc.body, pronounsVar, dudeVar);
+
+  var observerConfig = {
+    characterData: true,
+    childList: true,
+    subtree: true
+  };
 
   var observer = new MutationObserver(handleMutation);
-  observer.observe(document.body);
+  observer.observe(document.body, observerConfig);
 }
 
 // Yeah, I'm a Java developer.
-main(document);
+getPrefs();
