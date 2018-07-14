@@ -1,28 +1,26 @@
 // TODO: Translate the WHOLE page and then, based on options, change a few (back, or whatever)
 // Window.localStorage
 
-var changePronouns, dudeReplacement;
+var changePronouns, dudeReplacement, dudePluralReplacement;
 
 function getPrefs() {
   chrome.storage.local.get(
-    { pronounsBool: true, dudeReplacement: "" },
+    { pronounsBool: true, dudeReplacement: "", dudePluralReplacement: "" },
     function(obj) {
       changePronouns = obj.pronounsBool;
       dudeReplacement = obj.dudeReplacement;
-      console.log("storage.local: " + changePronouns + dudeReplacement);
+      dudePluralReplacement = obj.dudePluralReplacement;
+      console.log(
+        "storage.local: " +
+          changePronouns +
+          dudeReplacement +
+          dudePluralReplacement
+      );
 
       // Java dev btw.
       main(document);
     }
   );
-  // chrome.storage.sync.get("pronounsBool", function(obj) {
-  //   changePronouns = obj.pronounsBool;
-  //   console.log(changePronouns);
-  // });
-  // chrome.storage.sync.get("dudeReplacement", function(obj) {
-  //   dudeReplacement = obj.dudeReplacement;
-  //   console.log(dudeReplacement);
-  // });
 }
 
 // Primary replacement function. Parameter node, returns replacement text.
@@ -64,6 +62,24 @@ function neutralizeNode(nodeText) {
     text = text.replace(/\bHer\b/g, "Their");
     text = text.replace(/\bhimself\b/g, "themselves");
     text = text.replace(/\bherself\b/g, "themselves");
+  }
+  if (
+    dudeReplacement != null &&
+    dudeReplacement != "" &&
+    dudePluralReplacement != null &&
+    dudePluralReplacement != ""
+  ) {
+    text = text.replace(
+      /\bDude\b/g,
+      dudeReplacement.charAt(0).toUpperCase() + dudeReplacement.slice(1)
+    );
+    text = text.replace(/\bdude\b/g, dudeReplacement.toLowerCase());
+    text = text.replace(
+      /\bDudes\b/g,
+      dudePluralReplacement.charAt(0).toUpperCase() +
+        dudePluralReplacement.slice(1)
+    );
+    text = text.replace(/\bdudes\b/g, dudePluralReplacement.toLowerCase());
   }
 
   // Gendered relational titles
