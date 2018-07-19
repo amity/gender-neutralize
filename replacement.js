@@ -42,9 +42,10 @@ function neutralizeNode(nodeText) {
     text = text.replace(/\bHe is\b/g, "They are");
     text = text.replace(/\bShe is\b/g, "They are");
     text = text.replace(/\b(s)?he is\b/g, "they are");
-    text = text.replace(/\b(s)?he ([^ ]+)(s\b)/, "they $2");
-    text = text.replace(/\bShe ([^ ]+)(s\b)/, "They $2");
-    text = text.replace(/\bHe ([^ ]+)(s\b)/, "They $2");
+    text = text.replace(/\b(she )([^ ]+)(s\b)/, "they $2");
+    text = text.replace(/\b(he )([^ ]+)(s\b)/, "they $2");
+    text = text.replace(/\b(She )([^ ]+)(s\b)/, "They $2");
+    text = text.replace(/\b(He )([^ ]+)(s\b)/, "They $2");
     // Imperfect below -- but "her" as subject / possessive are tough
     text = text.replace(/\bher$/g, "them");
     text = text.replace(/ing her\b/g, "ing them");
