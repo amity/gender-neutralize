@@ -1,12 +1,14 @@
 function save_options() {
   var pronouns = document.getElementById("pronouns").checked;
+  var feMaleBool = document.getElementById("feMale").checked;
   var dude = document.getElementById("dude").value;
   var dudePlural = document.getElementById("dudePlural").value;
   chrome.storage.sync.set(
     {
       pronounsBool: pronouns,
       dudeReplacement: dude,
-      dudePluralReplacement: dudePlural
+      dudePluralReplacement: dudePlural,
+      feMaleBool: feMaleBool
     },
     function() {
       // Update status to let user know options were saved.
@@ -18,12 +20,14 @@ function save_options() {
     }
   );
   localStorage.setItem("pronounsKey", pronouns);
+  localStorage.setItem("feMaleBool", feMaleBool);
   localStorage.setItem("dudeKey", dude);
   localStorage.setItem("dudePluralKey", dudePlural);
 
   chrome.storage.local.set(
     {
       pronounsBool: pronouns,
+      feMaleBool: feMaleBool,
       dudeReplacement: dude,
       dudePluralReplacement: dudePlural
     },
@@ -35,7 +39,7 @@ function save_options() {
 
   // Read it using the storage API
   chrome.storage.sync.get(
-    ["pronounsBool", "dudeReplacement", "dudePluralReplacement"],
+    ["pronounsBool", "dudeReplacement", "dudePluralReplacement", "feMaleBool"],
     function(items) {
       message("Settings retrieved", items);
     }
@@ -49,15 +53,18 @@ function restore_options() {
   chrome.storage.sync.get(
     {
       pronounsBool: true,
+      feMaleBool: false,
       dudeReplacement: "",
       dudePluralReplacement: ""
     },
     function(items) {
       document.getElementById("pronouns").checked = items.pronounsBool;
+      document.getElementById("feMale").checked = items.feMaleBool;
       document.getElementById("dude").value = items.dudeReplacement;
       document.getElementById("dudePlural").value = items.dudePluralReplacement;
 
       localStorage.setItem("pronounsBool", items.pronounsBool);
+      localStorage.setItem("feMaleBool", items.feMaleBool);
       localStorage.setItem("dudeReplacement", items.dudeReplacement);
       localStorage.setItem(
         "dudePluralReplacement",

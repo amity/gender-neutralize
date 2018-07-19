@@ -1,5 +1,6 @@
 <h2>Gender Neutralize</h2>
 Chrome extension to turn unnecessarily gendered words into their gender-neutral alternatives across the web. Currently covers traditional male and female pronouns, relational titles (e.g. "boyfriend", "daughter"), professional and occupational titles (e.g. "Congressman"), and more -- check content_script.js for a full list.  
+To modify the changes that are made, please check the extension options from the Chrome Extensions Menu.
 
 Pre- and Post- Extension:
 
@@ -23,4 +24,4 @@ If you have any concerns, suggestions, or questions about the extension, please 
 
 [Gender-Neutral Washrooms: Campus and Community](https://qmunicatemagazine.com/2015/02/07/gender-neutral-washrooms-campus-and-community)
 
-Current version: 3.2.2. Last updated 7/14/18.
+Current version: 3.2.4. Last updated 7/19/18.
