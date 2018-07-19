@@ -5,9 +5,15 @@ var changePronouns, dudeReplacement, dudePluralReplacement;
 
 function getPrefs() {
   chrome.storage.local.get(
-    { pronounsBool: true, dudeReplacement: "", dudePluralReplacement: "" },
+    {
+      pronounsBool: true,
+      feMaleBool: false,
+      dudeReplacement: "",
+      dudePluralReplacement: ""
+    },
     function(obj) {
       changePronouns = obj.pronounsBool;
+      feMale = obj.feMaleBool;
       dudeReplacement = obj.dudeReplacement;
       dudePluralReplacement = obj.dudePluralReplacement;
 
@@ -63,17 +69,38 @@ function neutralizeNode(nodeText) {
     dudePluralReplacement != null &&
     dudePluralReplacement != ""
   ) {
-    text = text.replace(
-      /\bDude\b/g,
-      dudeReplacement.charAt(0).toUpperCase() + dudeReplacement.slice(1)
-    );
-    text = text.replace(/\bdude\b/g, dudeReplacement.toLowerCase());
-    text = text.replace(
-      /\bDudes\b/g,
+    const dudeLower = dudeReplacement.toLowerCase();
+    const dudeUpper =
+      dudeReplacement.charAt(0).toUpperCase() + dudeReplacement.slice(1);
+    const dudeLowerPlural = dudePluralReplacement.toLowerCase();
+    const dudeUpperPlural =
       dudePluralReplacement.charAt(0).toUpperCase() +
-        dudePluralReplacement.slice(1)
-    );
-    text = text.replace(/\bdudes\b/g, dudePluralReplacement.toLowerCase());
+      dudePluralReplacement.slice(1);
+
+    text = text.replace(/\bDude\b/g, dudeUpper);
+    text = text.replace(/\bdude\b/g, dudeLower);
+    text = text.replace(/\bDudes\b/g, dudeUpperPlural);
+    text = text.replace(/\bdudes\b/g, dudeLowerPlural);
+
+    text = text.replace(/\bBro\b/g, dudeUpper);
+    text = text.replace(/\bbro\b/g, dudeLower);
+    text = text.replace(/\bBros\b/g, dudeUpperPlural);
+    text = text.replace(/\bbros\b/g, dudeLowerPlural);
+
+    text = text.replace(/\bGuy\b/g, dudeUpper);
+    text = text.replace(/\bguy\b/g, dudeLower);
+    text = text.replace(/\bGuys\b/g, dudeUpperPlural);
+    text = text.replace(/\bguys\b/g, dudeLowerPlural);
+
+    text = text.replace(/\bSis\b/g, dudeUpper);
+    text = text.replace(/\bsis\b/g, dudeLower);
+    text = text.replace(/\bGuys\b/g, dudeUpperPlural);
+    text = text.replace(/\bguys\b/g, dudeLowerPlural);
+
+    text = text.replace(/\bGuy\b/g, dudeUpper);
+    text = text.replace(/\bguy\b/g, dudeLower);
+    text = text.replace(/\bGuys\b/g, dudeUpperPlural);
+    text = text.replace(/\bguys\b/g, dudeLowerPlural);
   }
 
   // Gendered relational titles
@@ -206,6 +233,8 @@ function neutralizeNode(nodeText) {
   // For bachelor's degree, etc., it's typically capitalized,
   // or at least possessive.
   text = text.replace(/\bbachelor /g, "single person ");
+  text = text.replace(/\bmankind/g, "humankind");
+  text = text.replace(/\bMankind/g, "Humankind");
 
   // Base terms
   text = text.replace(/\ba (wo)?man\b/g, "an individual");
@@ -215,6 +244,14 @@ function neutralizeNode(nodeText) {
   text = text.replace(/woman\b/g, "person");
   text = text.replace(/\bman\b/g, "person");
   text = text.replace(/\b(wo)?men\b/g, "people");
+
+  console.log(feMale);
+
+  if (feMale) {
+    text = text.replace(/( )?(F|f)emale/g, "");
+    text = text.replace(/( )?(M|m)ale/g, "");
+  }
+
   return text;
 }
 
