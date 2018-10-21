@@ -19,7 +19,7 @@ All information is modified locally, and the application does not collect or tra
 If you have any concerns, suggestions, or questions about the extension, please contact me at sophie.a.debs@gmail.com.
 
 <h4>Credits:</h4>
-- Many thanks to Nate Neumann for getting this project off the ground, and to the "Millennials to Snake People" Chrome extension for the design.
+- Credit goes to the "Millennials to Snake People" Chrome extension for the idea and tech framework.
 - Credits to Qmunicate Magazine for the image; taken from a great article:
 
 [Gender-Neutral Washrooms: Campus and Community](https://qmunicatemagazine.com/2015/02/07/gender-neutral-washrooms-campus-and-community)
