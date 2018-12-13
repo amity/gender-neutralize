@@ -1,5 +1,5 @@
 <h2>Gender Neutralize</h2>
-Chrome extension to turn unnecessarily gendered words into their gender-neutral alternatives across the web. Currently covers traditional male and female pronouns, relational titles (e.g. "boyfriend", "daughter"), professional and occupational titles (e.g. "Congressman"), and more -- check content_script.js for a full list.  
+Chrome extension to turn unnecessarily gendered words into their gender-neutral alternatives across the web. Currently covers traditional male and female pronouns, relational titles (e.g. "boyfriend", "daughter"), professional and occupational titles (e.g. "Congressman"), and more -- check replacement.js for a full list.  
 To modify the changes that are made, please check the extension options from the Chrome Extensions Menu.
 
 Pre- and Post- Extension:
