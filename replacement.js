@@ -47,22 +47,22 @@ function neutralizeNode(nodeText) {
     text = text.replace(/\b(She )([^ ]+)(s\b)/, "They $2");
     text = text.replace(/\b(He )([^ ]+)(s\b)/, "They $2");
     // Imperfect below -- but "her" as subject / possessive are tough
-    text = text.replace(/\bher$/g, "them");
-    text = text.replace(/ing her\b/g, "ing them");
-    text = text.replace(/\b(s)?he\b/g, "they");
-    text = text.replace(/\b(s)?he\b/g, "they");
-    text = text.replace(/\bHe\b/g, "They");
-    text = text.replace(/\bShe\b/g, "They");
-    text = text.replace(/\bhers\b/g, "theirs");
-    text = text.replace(/\bHers\b/g, "Theirs");
-    text = text.replace(/\bhim\b/g, "them");
-    text = text.replace(/\bHim\b/g, "Them");
-    text = text.replace(/\bHis\b/g, "Their");
-    text = text.replace(/\bhis\b/g, "their");
-    text = text.replace(/\bher\b/g, "their");
-    text = text.replace(/\bHer\b/g, "Their");
-    text = text.replace(/\bhimself\b/g, "themselves");
-    text = text.replace(/\bherself\b/g, "themselves");
+    text = text.replace(/\sher$/g, "them");
+    text = text.replace(/ing her\s/g, "ing them");
+    text = text.replace(/\s(s)?he\s/g, "they");
+    text = text.replace(/\s(s)?he\s/g, "they");
+    text = text.replace(/\sHe\s/g, "They");
+    text = text.replace(/\sShe\s/g, "They");
+    text = text.replace(/\shers\s/g, "theirs");
+    text = text.replace(/\sHers\s/g, "Theirs");
+    text = text.replace(/\shim\s/g, "them");
+    text = text.replace(/\sHim\s/g, "Them");
+    text = text.replace(/\sHis\s/g, "Their");
+    text = text.replace(/\shis\s/g, "their");
+    text = text.replace(/\sher\s/g, "their");
+    text = text.replace(/\sHer\s/g, "Their");
+    text = text.replace(/\shimself\s/g, "themselves");
+    text = text.replace(/\sherself\s/g, "themselves");
   }
   if (
     dudeReplacement != null &&
